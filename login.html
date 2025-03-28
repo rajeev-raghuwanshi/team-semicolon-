@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-[#6BBF59] p-6 w-full fixed top-0 left-0 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-2xl font-bold uppercase">sahaj</a>
+            <button id="menu-btn" class="text-white text-2xl md:hidden">☰</button>
+            <ul id="menu" class="hidden md:flex space-x-20 text-white text-lg">
+                <li><a href="/" class="hover:text-gray-200">Home</a></li>
+                <li><a href="about.html" class="hover:text-gray-200">About</a></li>
+                <li><a href="contact.html" class="hover:text-gray-200">Contact Us</a></li>
+                <li>
+                    <a href="login&registration.html"
+                       class="bg-white text-[#6BBF59] px-4 py-2 rounded-lg hover:bg-[#6BBF59] hover:text-white">
+                       Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Login & Registration Section -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl w-full flex mt-20">
+        <!-- Left Side Image -->
+        <div class="w-1/2 h-[70vh] hidden md:block">
+            <img src="https://img.freepik.com/free-vector/fingerprint-concept-illustration_114360-3630.jpg?t=st=1743152084~exp=1743155684~hmac=1ad6a28608ba820a8771a8d009677de0784181d05fb2558740a35034cfb67eb0&w=826" 
+                 alt="Mental Wellness" class="w-full h-full object-cover ">
+        </div>
+
+        <!-- Right Side Form -->
+        <div class="w-full md:w-1/2 p-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Welcome! 🌿</h2>
+
+            <!-- Login Form -->
+            <div id="loginForm">
+                <p class="text-gray-600 text-center mb-4">Sign in to your account</p>
+                <input type="text" id="loginUsername" placeholder="Username" class="w-full p-3 border rounded-lg mb-3">
+                <input type="password" id="loginPassword" placeholder="Password" class="w-full p-3 border rounded-lg mb-3">
+                <button onclick="login()" class="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600">
+                    Login
+                </button>
+                <p class="text-sm text-center text-gray-600 mt-3">
+                    Don't have an account? <a href="#" onclick="toggleForm()" class="text-blue-500">Register</a>
+                </p>
+            </div>
+
+            <!-- Registration Form (Hidden Initially) -->
+            <div id="registerForm" class="hidden">
+                <p class="text-gray-600 text-center mb-4">Create a new account</p>
+                <input type="text" id="registerUsername" placeholder="Username" class="w-full p-3 border rounded-lg mb-3">
+                <input type="email" id="registerEmail" placeholder="Email" class="w-full p-3 border rounded-lg mb-3">
+                <input type="password" id="registerPassword" placeholder="Password" class="w-full p-3 border rounded-lg mb-3">
+                <button onclick="register()" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600">
+                    Register
+                </button>
+                <p class="text-sm text-center text-gray-600 mt-3">
+                    Already have an account? <a href="#" onclick="toggleForm()" class="text-green-500">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            document.getElementById('loginForm').classList.toggle('hidden');
+            document.getElementById('registerForm').classList.toggle('hidden');
+        }
+
+        function register() {
+            let username = document.getElementById('registerUsername').value;
+            let password = document.getElementById('registerPassword').value;
+            
+            if (username && password) {
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+                alert('Registration successful! Please login.');
+                toggleForm();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function login() {
+            let username = document.getElementById('loginUsername').value;
+            let password = document.getElementById('loginPassword').value;
+            let storedUsername = localStorage.getItem('username');
+            let storedPassword = localStorage.getItem('password');
+        
+            if (username === storedUsername && password === storedPassword) {
+                localStorage.setItem('loggedInUser', username); // Store logged-in user
+                window.location.href = "homepage.html"; // Redirect to the home page
+            } else {
+                alert('Invalid credentials! Please try again.');
+            }
+        }
+    </script>
+
+</body>
+</html>
